@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <employee
+            id="1"
+            first_name="first"
+            last_name="last"
+            email="dima@gmail.com"
+            birthday="23.06.2002"
+    />
+</dataset>
