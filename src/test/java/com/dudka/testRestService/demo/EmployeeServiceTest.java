@@ -1,12 +1,9 @@
 package com.dudka.testRestService.demo;
 
-import com.dudka.testRestService.demo.dto.EmployeeDto;
-import com.dudka.testRestService.demo.dto.mapper.MapEmployeeToDto;
 import com.dudka.testRestService.demo.model.Employee;
-import com.dudka.testRestService.demo.repository.EmployeeRepository;
+import com.dudka.testRestService.demo.service.EmployeeService;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
-import org.junit.Before;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +12,6 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.support.DependencyInjectionTestExecutionListener;
 import org.springframework.test.context.support.DirtiesContextTestExecutionListener;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
@@ -35,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class EmployeeServiceTest {
 
     @Autowired
-    public EmployeeRepository employeeRepository;
+    public EmployeeService employeeService;
 
     private Optional<Employee> expectedEmployee;
     @BeforeEach
@@ -51,7 +47,7 @@ public class EmployeeServiceTest {
     void findByIdEmployee() {
         Long id = 1L;
 
-        Optional<Employee> employee = employeeRepository.findById(id);
+        Optional<Employee> employee = employeeService.findById(id);
         expectedEmployee.ifPresent(value -> assertAll(() -> {
                     assertTrue(employee.isPresent());
                     assertEquals(1, employee.get().getId());
